@@ -20,23 +20,29 @@ modules:
   - type: fonts
     fonts:
       nerd-fonts:
-        - AtkynsonMono
-        - CaskaydiaCove
+        - AtkinsonHyperlegibleMono
+        - CascadiaCode
         - CommitMono
         - Cousine
-        - DroidSansM
+        - DejaVuSansMono
+        - DroidSansMono
         - FiraCode
         - FiraMono
         - Hack
-        - Hasklug
-        - iMWriting
+        - Hasklig
+        - iA-Writer
         - Inconsolata
         - JetBrainsMono
         - Lekton
         - Lilex
         - Mononoki
+        - Noto
+        - ProFont
+        - SourceCodePro
         - SpaceMono
         - Ubuntu
+        - UbuntuMono
+        - UbuntuSans
         - NerdFontsSymbolsOnly
       google-fonts:
         - Atkinson Hyperlegible
