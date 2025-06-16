@@ -67,8 +67,10 @@ modules:
             - keyd
         - sysstat
         - neovim
+        - fd-find
         - python3-neovim
         - wireshark
+        - nmap
         #TODO: replace the opensnitch install with a module that pulls the latest arbitrary release
         - https://github.com/evilsocket/opensnitch/releases/download/v1.7.0.0/opensnitch-1.7.0.0-1.x86_64.rpm
         - https://github.com/evilsocket/opensnitch/releases/download/v1.7.0.0/opensnitch-ui-1.7.0.0-1.noarch.rpm
