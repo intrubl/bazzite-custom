@@ -4,15 +4,27 @@
 
 set -euo pipefail
 
-INSTALL=$(echo "$1" | jq -r 'try .["install"]')
+INSTALL=$(echo "$1" | jq -r 'try .["apples"]')
 
 echo "$INSTALL"
 
-#Curl the proper urls
+if [[ "$INSTALL" == "true" ]]; then
 
+    declare -A DL_URLS
+    DL_URLS["OPENSNITCH_RPM"]=$(curl -s "https://api.github.com/repos/evilsocket/opensnitch/releases/latest" | jq -r '.assets[] | select(.name | test("opensnitch-\\d.*\\.x86_64.rpm")) | .browser_download_url')
+    DL_URLS["OPENSNITCH_UI_RPM"]=$(curl -s "https://api.github.com/repos/evilsocket/opensnitch/releases/latest" | jq -r '.assets[] | select(.name | test("opensnitch-ui-\\d.*\\.noarch.rpm")) | .browser_download_url')
 
+    # Probably a better way to format this
+    for url in "${!DL_URLS[@]}"; do
+        if [[ ! ${DL_URLS[$url]} =~ ^https?://.*\.rpm$ ]]; then
+            echo "$url is incorrect or improperly formatted! Aborting..."
+            exit 1
+        fi
+    done
 
-
+    echo "Installing opensnitch packages:"
+    rpm-ostree install "${DL_URLS[@]}"
+fi
 
 #
 # # read a single variable from the configuration
