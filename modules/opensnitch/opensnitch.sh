@@ -4,7 +4,7 @@
 
 set -euo pipefail
 
-INSTALL=$(echo "$1" | jq -r 'try .["apples"]')
+INSTALL=$(echo "$1" | jq -r 'try .["enable"]')
 
 if [[ "$INSTALL" == "true" ]]; then
 
