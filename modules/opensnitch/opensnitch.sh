@@ -6,8 +6,6 @@ set -euo pipefail
 
 INSTALL=$(echo "$1" | jq -r 'try .["apples"]')
 
-echo "$INSTALL"
-
 if [[ "$INSTALL" == "true" ]]; then
 
     declare -A DL_URLS
