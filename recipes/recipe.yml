@@ -47,39 +47,28 @@ modules:
       google-fonts:
         - Atkinson Hyperlegible
 
-  - type: dnf
+  - type: rpm-ostree
     repos:
-      cleanup: true
-      files:
-        - https://repository.mullvad.net/rpm/beta/mullvad.repo
-      copr:
-        - alternateved/keyd
+      - https://repository.mullvad.net/rpm/beta/mullvad.repo
+      - https://copr.fedorainfracloud.org/coprs/alternateved/keyd/repo/fedora-%OS_VERSION%/alternateved-keyd-fedora-%OS_VERSION%.repo
     optfix:
       - Mullvad VPN
     install:
-      skip-unavailable: true
-      packages:
-        - repo: mullvad-beta
-          packages:
-            - mullvad-vpn
-        - repo: copr:copr.fedorainfracloud.org:alternateved:keyd
-          packages:
-            - keyd
-        - sysstat
-        - neovim
-        - fd-find
-        - python3-neovim
-        - wireshark
-        - nmap
-        #TODO: replace the opensnitch install with a module that pulls the latest arbitrary release
-        - https://github.com/evilsocket/opensnitch/releases/download/v1.7.0.0/opensnitch-1.7.0.0-1.x86_64.rpm
-        - https://github.com/evilsocket/opensnitch/releases/download/v1.7.0.0/opensnitch-ui-1.7.0.0-1.noarch.rpm
+      - mullvad-vpn
+      - keyd
+      - sysstat
+      - fd-find
+      - neovim
+      - python3-neovim
+      - wireshark
+      - nmap
+
 
   - type: systemd
-      system:
-        disabled:
-          - brew-setup.service
-          - brew-update.timer
-          - brew-upgrade.timer
+    system:
+      disabled:
+        - brew-setup.service
+        - brew-update.timer
+        - brew-upgrade.timer
 
   - type: signing # this sets up the proper policy & signing files for signed images to work fully
