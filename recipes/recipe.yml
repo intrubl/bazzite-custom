@@ -17,62 +17,63 @@ modules:
       - source: system
         destination: / # copies files/system/* (* means everything inside it) into your image's root folder /
 
+  - type: fonts
+    fonts:
+      nerd-fonts:
+        - AtkinsonHyperlegibleMono
+        - CascadiaCode
+        - CommitMono
+        - Cousine
+        - DejaVuSansMono
+        - DroidSansMono
+        - FiraCode
+        - FiraMono
+        - Hack
+        - Hasklig
+        - iA-Writer
+        - Inconsolata
+        - JetBrainsMono
+        - Lekton
+        - Lilex
+        - Mononoki
+        - Noto
+        - ProFont
+        - SourceCodePro
+        - SpaceMono
+        - Ubuntu
+        - UbuntuMono
+        - UbuntuSans
+        - NerdFontsSymbolsOnly
+      google-fonts:
+        - Atkinson Hyperlegible
+
+  - type: rpm-ostree
+    repos:
+      - https://repository.mullvad.net/rpm/beta/mullvad.repo
+      - https://copr.fedorainfracloud.org/coprs/alternateved/keyd/repo/fedora-%OS_VERSION%/alternateved-keyd-fedora-%OS_VERSION%.repo
+    optfix:
+      - Mullvad VPN
+    install:
+      - mullvad-vpn
+      - keyd
+      - sysstat
+      - fd-find
+      - neovim
+      - python3-neovim
+      - wireshark
+      - nmap
+
   - type: opensnitch
+    # needed?
     source: local
     apples: true
 
-  # - type: fonts
-  #   fonts:
-  #     nerd-fonts:
-  #       - AtkinsonHyperlegibleMono
-  #       - CascadiaCode
-  #       - CommitMono
-  #       - Cousine
-  #       - DejaVuSansMono
-  #       - DroidSansMono
-  #       - FiraCode
-  #       - FiraMono
-  #       - Hack
-  #       - Hasklig
-  #       - iA-Writer
-  #       - Inconsolata
-  #       - JetBrainsMono
-  #       - Lekton
-  #       - Lilex
-  #       - Mononoki
-  #       - Noto
-  #       - ProFont
-  #       - SourceCodePro
-  #       - SpaceMono
-  #       - Ubuntu
-  #       - UbuntuMono
-  #       - UbuntuSans
-  #       - NerdFontsSymbolsOnly
-  #     google-fonts:
-  #       - Atkinson Hyperlegible
-  #
-  # - type: rpm-ostree
-  #   repos:
-  #     - https://repository.mullvad.net/rpm/beta/mullvad.repo
-  #     - https://copr.fedorainfracloud.org/coprs/alternateved/keyd/repo/fedora-%OS_VERSION%/alternateved-keyd-fedora-%OS_VERSION%.repo
-  #   optfix:
-  #     - Mullvad VPN
-  #   install:
-  #     - mullvad-vpn
-  #     - keyd
-  #     - sysstat
-  #     - fd-find
-  #     - neovim
-  #     - python3-neovim
-  #     - wireshark
-  #     - nmap
-  #
-  #
-  # - type: systemd
-  #   system:
-  #     disabled:
-  #       - brew-setup.service
-  #       - brew-update.timer
-  #       - brew-upgrade.timer
+
+  - type: systemd
+    system:
+      disabled:
+        - brew-setup.service
+        - brew-update.timer
+        - brew-upgrade.timer
 
   - type: signing # this sets up the proper policy & signing files for signed images to work fully
