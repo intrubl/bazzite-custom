@@ -1,5 +1,19 @@
 #!/usr/bin/env bash
+
+# Module for downloading and installing the latest Opensnitch release
+
 set -euo pipefail
+
+INSTALL=$(echo "$1" | jq -r 'try .["install"]')
+
+echo "$INSTALL"
+
+#Curl the proper urls
+
+
+
+
+
 #
 # # read a single variable from the configuration
 # # `try` makes the command output 'null' if the key is not found, otherwise it will error out and the build will fail
