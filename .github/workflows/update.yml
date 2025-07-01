@@ -1,4 +1,4 @@
-name: Update script for base image releases
+name: UpdateCheck
 
 on:
   schedule:
