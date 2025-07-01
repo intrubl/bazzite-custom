@@ -1,0 +1,52 @@
+name: Update script for base image releases
+
+on:
+  schedule:
+    - cron: '0 */6 * * *' # Run every 6 hours
+  workflow_dispatch:
+
+
+jobs:
+  check-digest:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Install Dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y skopeo jq
+
+      - name: Fetch latest Bazzite digest
+        id: base
+        run: |
+          BASE_DIGEST=$(skopeo inspect docker://ghcr.io/ublue-os/bazzite:latest | jq -r '.Digest')
+          echo "base_digest=$BASE_DIGEST" >> $GITHUB_OUTPUT
+
+      - name: Fetch latest custom base image
+        id: current
+        run: |
+          CURRENT_DIGEST=$(skopeo inspect docker://ghcr.io/intrubl/bazzite-custom:latest | jq -r '.Labels["org.opencontainers.image.base.digest"]')
+          echo "current_digest=$CURRENT_DIGEST" >> $GITHUB_OUTPUT
+      
+      - name: Compare digests
+        id: compare
+        run: |
+          BASE_DIGEST="${{ steps.base.outputs.base_digest }}"
+          CURRENT_DIGEST="${{ steps.current.outputs.current_digest }}"
+
+          echo "Base digest: $BASE_DIGEST"
+          echo "Current digest: $CURRENT_DIGEST"
+
+          if [ "$BASE_DIGEST" != "$CURRENT_DIGEST" ]; then
+            echo "Changed=true" >> $GITHUB_OUTPUT
+            echo "✅ Digests differ - change detected"
+          else
+            echo "Changed=false" >> $GITHUB_OUTPUT
+            echo "🔄 Digests match - no change"
+          fi
+
+      - name: Trigger image build
+        if: steps.compare.outputs.Changed == 'true'
+        uses: peter-evans/repository-dispatch@v3
+        with:
+          event-type: bazzite_oci_update
