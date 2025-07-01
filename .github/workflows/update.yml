@@ -5,6 +5,9 @@ on:
     - cron: '0 */6 * * *' # Run every 6 hours
   workflow_dispatch:
 
+permissions:
+  contents: write
+  actions: write
 
 jobs:
   check-digest:
@@ -49,5 +52,4 @@ jobs:
         if: steps.compare.outputs.Changed == 'false'
         uses: peter-evans/repository-dispatch@v3
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
           event-type: bazzite_oci_update
