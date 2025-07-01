@@ -6,7 +6,6 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
   actions: write
 
 jobs:
@@ -49,7 +48,7 @@ jobs:
           fi
 
       - name: Trigger image build
-        if: steps.compare.outputs.Changed == 'false'
+        if: steps.compare.outputs.Changed == 'true'
         uses: peter-evans/repository-dispatch@v3
         with:
           event-type: bazzite_oci_update
