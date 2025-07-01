@@ -49,4 +49,5 @@ jobs:
         if: steps.compare.outputs.Changed == 'false'
         uses: peter-evans/repository-dispatch@v3
         with:
+          token: ${{ secrets.GITHUB_TOKEN }}
           event-type: bazzite_oci_update
