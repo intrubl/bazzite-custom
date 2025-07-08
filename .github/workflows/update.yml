@@ -5,13 +5,20 @@ on:
     - cron: '0 */12 * * *' # Run every 6 hours
   workflow_dispatch:
 
+<<<<<<< HEAD
 permissions:
   actions: write
   contents: write
 
+=======
+>>>>>>> 97d7eb4 (changed name)
 jobs:
   check-digest:
     runs-on: ubuntu-latest
+
+  permissions:
+    actions: write
+
 
     steps:
       - name: Install Dependencies
@@ -25,7 +32,7 @@ jobs:
           BASE_DIGEST=$(skopeo inspect docker://ghcr.io/ublue-os/bazzite:latest | jq -r '.Digest')
           echo "base_digest=$BASE_DIGEST" >> $GITHUB_OUTPUT
 
-      - name: Fetch latest custom base image
+      - name: Fetch latest base image digest
         id: current
         run: |
           CURRENT_DIGEST=$(skopeo inspect docker://ghcr.io/intrubl/bazzite-custom:latest | jq -r '.Labels["org.opencontainers.image.base.digest"]')
