@@ -5,13 +5,10 @@ on:
     - cron: '0 */12 * * *' # Run every 6 hours
   workflow_dispatch:
 
-<<<<<<< HEAD
 permissions:
   actions: write
   contents: write
 
-=======
->>>>>>> 97d7eb4 (changed name)
 jobs:
   check-digest:
     runs-on: ubuntu-latest
