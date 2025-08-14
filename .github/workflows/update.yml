@@ -13,10 +13,6 @@ jobs:
   check-digest:
     runs-on: ubuntu-latest
 
-  permissions:
-    actions: write
-
-
     steps:
       - name: Install Dependencies
         run: |
