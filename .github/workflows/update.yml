@@ -50,6 +50,6 @@ jobs:
 
       - name: Trigger image build
         if: steps.compare.outputs.Changed == 'true'
-        uses: peter-evans/repository-dispatch@v3
+        uses: peter-evans/repository-dispatch@v4
         with:
           event-type: bazzite_oci_update
