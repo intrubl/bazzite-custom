@@ -21,28 +21,15 @@ modules:
     fonts:
       nerd-fonts:
         - AtkinsonHyperlegibleMono
-        - CascadiaCode
-        - CommitMono
-        - Cousine
-        - DejaVuSansMono
-        - DroidSansMono
         - FiraCode
-        - FiraMono
         - Hack
         - Hasklig
         - iA-Writer
         - Inconsolata
-        - JetBrainsMono
-        - Lekton
-        - Lilex
         - Mononoki
-        - Noto
         - ProFont
         - SourceCodePro
         - SpaceMono
-        - Ubuntu
-        - UbuntuMono
-        - UbuntuSans
         - NerdFontsSymbolsOnly
       google-fonts:
         - Atkinson Hyperlegible
